@@ -1,0 +1,192 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="row">
+
+        <div class="col-md-7">
+
+          <div>
+            <div class="card mb-3" style="max-height: 200px;">
+              <div class="row g-0">
+                  <div class="col-md-2">
+                      <img src="https://t3.ftcdn.net/jpg/05/16/27/58/240_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg" alt="{{ username }}" class="img-fluid rounded-start"
+                      style="height: 200px;"  />
+                  </div>
+                  <div class="col">
+                      <div class="card-body">
+                          <h5 class="card-title">{{ user.username }} </h5>
+                          <hr>
+                          <p class="card-text">
+                             <b>Profile Utilisateur : </b>        
+                             
+                        {% if user.aspects != 'nan' %}
+                        {{ user.aspects}}
+                        {% endif %} </p>
+                        
+                         <p class="card-text">
+                          
+                          <b>Interets: </b>
+                          
+                          {{ interests}} </p>
+
+                          
+
+                         
+                      </div>
+                  </div>
+              </div>
+          </div>
+          </div>
+
+
+            <h3>Recommandés pour vous</h3>
+
+            <hr>
+
+
+            {% for h in hotels %}
+            <div class="card mb-3" style="max-height: 250px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                      
+                        <img src="{{ h.hotel.image_url }}" alt="{{ h.hotel.hotel_name }}" class="img-fluid rounded-start"
+                        style="height: 250px;"  />
+                       
+                    </div>
+                    <div class="col">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ h.hotel.hotel_name }} <span class="badge badge-primary"> {{h.hotel.avg_rating }}</span></h5>
+                            {% if h.hotel.location != 'nan' %}
+                            <p class="card-text" > {{ h.hotel.location }}</p>
+                            {% else %}
+                             <p style="color: rgb(237, 167, 5);"> Pas de localisation disponible </p>
+                            {% endif %}
+                           
+
+                            {% if h.aspects != 'nan' %}
+                            <p class="card-text"> <b>Aspects:</b>  {{ h.aspects }}</p>
+                            {% else %}
+                             <p style="color: rgb(237, 167, 5);"> Pas d'aspects disponible </p>
+                            {% endif %}
+                            
+
+                            <a href="{{ h.hotel.hotel_url }}" class="btn btn-primary">Visiter l'Hotel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+
+        <div class="col justify-content-center">
+
+
+                <h4>Top 10 Hôtels Aimés par des Utilisateurs Similaires</h4>
+
+
+                <div id="container " style="width: 75%;">
+                    <canvas id="pie-chart"></canvas>
+                </div>
+
+
+
+            <hr>
+
+            <h3>Top 5 Utilisateurs Similaires </h3>
+
+            
+
+            <ol class="list-group list-group-light list-group-numbered">
+
+                {% for user in users %}
+
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">{{ user.username }}</div>
+                        {% if user.aspects != 'nan' %}
+                        {{ user.aspects|truncatewords:8}}
+                        {% endif %}
+
+                    </div>
+
+                </li>
+
+
+                {% endfor %}
+
+
+
+            </ol>
+
+            
+
+
+
+        </div>
+
+
+
+
+        </div>
+
+
+
+
+
+    </div>
+
+
+</div>
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+  <script>
+
+    var config = {
+      type: 'pie',
+      data: {
+        datasets: [{
+          data: {{ data |safe }},
+          backgroundColor: [
+          'rgba(255, 99, 132, 0.7)',
+                        'rgba(54, 162, 235, 0.7)',
+                        'rgba(255, 206, 86, 0.7)',
+                        'rgba(75, 192, 192, 0.7)',
+                        'rgba(153, 102, 255, 0.7)',
+                        'rgba(255, 159, 64, 0.7)',
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(54, 162, 235, 0.7)',
+                        'rgba(255, 206, 86, 0.7)',
+                        'rgba(75, 192, 192, 0.7)'
+          ],
+          label: 'Hotels'
+        }],
+        labels: {{ labels|safe }}
+      },
+      options: {
+        responsive: true
+      }
+    };
+
+    window.onload = function() {
+      var ctx = document.getElementById('pie-chart').getContext('2d');
+      window.myPie = new Chart(ctx, config);
+    };
+
+  </script>
+
+
+
+{% endblock %}
+
+
+
+    
+

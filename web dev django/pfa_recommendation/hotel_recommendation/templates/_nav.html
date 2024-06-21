@@ -1,0 +1,121 @@
+<header>
+  <!-- Navbar -->
+  <nav class="navbar navbar-dark navbar-expand-lg" style="background-color: #016bb7;" data-mdb-theme="dark ">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+      <!-- Toggle button -->
+      <button data-mdb-collapse-init class="navbar-toggler" type="button" data-mdb-target="#navbarCenteredExample"
+        aria-controls="navbarCenteredExample" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+
+
+
+      <!-- Collapsible wrapper -->
+      <div class="collapse navbar-collapse justify-content-center" id="navbarCenteredExample">
+        <!-- Left links -->
+        <ul class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Acceuil</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="">Contact</a>
+          </li>
+        
+        
+
+          <li class="nav-item">
+            <a class="nav-link ">A propos</a>
+          </li>
+
+          {% if username %}
+
+          <!-- Navbar dropdown -->
+        <li class="nav-item dropdown">
+          <a
+            data-mdb-dropdown-init
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            aria-expanded="false"
+          >
+          <i class="fa-solid fa-user"></i> {{ username }}
+          </a>
+          <!-- Dropdown menu -->
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+              <a class="dropdown-item" href="{% url 'logout' %}">Déconnexion</a>
+            </li>
+           
+          </ul>
+        </li>
+
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" data-mdb-modal-init data-mdb-target="#exampleModal" data-mdb-whatever="@mdo">Connexion</a>
+          </li>
+          {% endif %}
+
+
+        </ul>
+        <!-- Left links -->
+      </div>
+      <!-- Collapsible wrapper -->
+    </div>
+    <!-- Container wrapper -->
+  </nav>
+  <!-- Navbar -->
+
+  <!-- Jumbotron -->
+  <div class="p-5 text-center" style="background-color: rgb(255, 165, 0); color: white;">
+    <h1 class="mb-3">Système De Recommandation Hotelière</h1>
+    {% if username %}
+    <a data-mdb-ripple-init class="btn btn-primary" type="button" class="btn btn-primary" href="{% url 'recommendations' %}" role="button">Avoir des
+      Recommandations</a>
+      {% else %}
+
+      <a data-mdb-ripple-init class="btn btn-primary" type="button" class="btn btn-primary" data-mdb-ripple-init
+      data-mdb-modal-init data-mdb-target="#exampleModal" data-mdb-whatever="@mdo" role="button">Avoir des
+      Recommandations</a>
+
+      {% endif %}
+  </div>
+
+
+
+  <!-- Jumbotron -->
+</header>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #016bb7; color: white;">
+        <h5 class="modal-title" id="exampleModalLabel">Saisir Votre Nom d'utilisateur</h5>
+        <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal"
+          aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" action="{% url 'login' %}">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Nom d'utilisateur:</label>
+            <input type="text" class="form-control" id="recipient-name" name="username" required />
+          </div>
+          <div class="mb-3">
+            <label for="recipient-password" class="col-form-label">Mot de passe :</label>
+            <input type="password" class="form-control" id="recipient-password" name="password" required />
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-mdb-ripple-init
+              data-mdb-dismiss="modal">Annuler</button>
+            <button type="submit" class="btn btn-primary" data-mdb-ripple-init>Avoir des
+              recommandations</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -51,5 +51,7 @@ This project aims to develop a hotel recommendation system by leveraging data fr
 
 ## DEMO 
 - **File**:  `project presentation demo.PDF`
+- **LINK PDF**: https://drive.google.com/file/d/1SJZDFIIw6jbY7bZ-o8sOYQp3MAaS3YGV/view?usp=drive_link
+- **LINK video demo**: https://drive.google.com/file/d/1SJZDFIIw6jbY7bZ-o8sOYQp3MAaS3YGV/view?usp=drive_link
 
    

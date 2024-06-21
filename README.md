@@ -46,12 +46,10 @@ This project aims to develop a hotel recommendation system by leveraging data fr
 
  **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/hotel-recommendation-system.git
-   cd hotel-recommendation-system
+   git clone https://github.com/yourusername/Hotel-Recommendation-System-based-on-sentiment-analysis-NLP.git
    ```
 
 ## DEMO 
-- **File**:  `[project presentation demo.pdf](https://github.com/user-attachments/files/15931925/project.presentation.demo.pdf)
-project presentation demo.PDF`
+- **File**:  `project presentation demo.PDF`
 
    
